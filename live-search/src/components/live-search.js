@@ -19,9 +19,12 @@ export default class LiveSearch extends React.Component {
   render() {
     return (
       <div className="live-search">
-        <SearchForm onChange={term => this.updateSearchTerm(term)}/>
+        <SearchForm onChange={(term) => this.updateSearchTerm(term)} />
         <CharacterCount count={this.props.characters.length} />
-        <CharacterList characters={this.props.characters} />
+        <CharacterList
+          characters={this.props.characters}
+          searchTerm={this.state.searchTerm}
+        />
       </div>
     );
   }
