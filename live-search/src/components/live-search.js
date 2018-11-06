@@ -7,12 +7,19 @@ import CharacterList from './character-list';
 export default class LiveSearch extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      searchTerm: '',
+    };
+  }
+
+  updateSearchTerm(searchTerm) {
+    this.setState({ searchTerm });
   }
 
   render() {
     return (
       <div className="live-search">
-        <SearchForm />
+        <SearchForm onChange={term => this.updateSearchTerm(term)}/>
         <CharacterCount count={this.props.characters.length} />
         <CharacterList characters={this.props.characters} />
       </div>
