@@ -16,15 +16,18 @@ export default class LiveSearch extends React.Component {
     this.setState({ searchTerm });
   }
 
+  filterCharacters() {
+    const searchRe = new RegExp(this.state.searchTerm, 'i');
+    return this.props.characters.filter((character) => character.name.match(searchRe));
+  }
+
   render() {
+    const characters = this.filterCharacters();
     return (
       <div className="live-search">
         <SearchForm onChange={(term) => this.updateSearchTerm(term)} />
-        <CharacterCount count={this.props.characters.length} />
-        <CharacterList
-          characters={this.props.characters}
-          searchTerm={this.state.searchTerm}
-        />
+        <CharacterCount count={characters.length} />
+        <CharacterList characters={characters} />
       </div>
     );
   }
